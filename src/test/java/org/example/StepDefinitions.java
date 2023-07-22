@@ -1,10 +1,8 @@
 package org.example;
 
-import PageObjects.MainPage;
-import PageObjects.PersonalInformation;
+import PageObjects.*;
 import io.cucumber.java.en.*;
 
-import org.junit.jupiter.api.Assertions.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -12,9 +10,19 @@ import org.openqa.selenium.chrome.ChromeOptions;
 public class StepDefinitions {
     private WebDriver driver;
     ChromeOptions options = new ChromeOptions();
-    MainPage mainPage;//creez un obiect cu numele mainPage in interiorul clasei MainPage
-    PersonalInformation personalInformation; //creez un obiect cu numele personalInformation in interiorul clasei PersonalInformation
 
+    //creez un obiect cu numele mainPage in interiorul clasei MainPage
+    MainPage mainPage;
+
+    //creez un obiect cu numele personalInformation in interiorul clasei PersonalInformation
+    PersonalInformation personalInformation;
+    ContactInformation contactInformation;
+
+    PaymentInformation paymentInformation;
+
+    CourseOptions courseOptions;
+
+    RegistrationConfirmation registrationConfirmation;
 
     public StepDefinitions() {
         options.addArguments("--remote-allow-origins=*");
@@ -22,6 +30,10 @@ public class StepDefinitions {
         driver.manage().window().maximize();
         mainPage = new MainPage(driver); //adaug obiectul creat in interiorul contructorului
         personalInformation = new PersonalInformation(driver); //adaug obiectul creat in interiorul contructorului
+        contactInformation = new ContactInformation(driver);
+        courseOptions = new CourseOptions(driver);
+        paymentInformation = new PaymentInformation(driver);
+        registrationConfirmation = new RegistrationConfirmation(driver);
     }
 
     @Given("I am on the main page")
@@ -34,6 +46,35 @@ public class StepDefinitions {
         driver.get("file:///E:/Stelica/Curs%20IT/Testing-Env-master/routes/enrollment.html");
     }
 
+    @Given("I am on Contact Information Page")
+    public void i_am_on_the_Contact_Information_Page() {
+        driver.get("file:///E:/Stelica/Curs%20IT/Testing-Env-master/routes/enrollment.html");
+        personalInformation.fillInPersonalInformationWithValidData();
+    }
+
+    @Given("I am on Course Options Page")
+    public void i_am_on_the_Course_Options_Page() {
+        driver.get("file:///E:/Stelica/Curs%20IT/Testing-Env-master/routes/enrollment.html");
+        personalInformation.fillInPersonalInformationWithValidData();
+        contactInformation.fillInContactInformationWithValidData();
+    }
+    @Given("I am on the Payment Information Page")
+    public  void i_am_on_the_Payment_Information_Page() {
+        driver.get("file:///E:/Stelica/Curs%20IT/Testing-Env-master/routes/enrollment.html");
+        personalInformation.fillInPersonalInformationWithValidData();
+        contactInformation.fillInContactInformationWithValidData();
+        courseOptions.fillInCourseOptionsWithValidData();
+    }
+
+    @Given("I am Registration Confirmation Page")
+    public void i_am_on_Registration_Confirmation_Page() {
+        driver.get("file:///E:/Stelica/Curs%20IT/Testing-Env-master/routes/enrollment.html");
+        personalInformation.fillInPersonalInformationWithValidData();
+        contactInformation.fillInContactInformationWithValidData();
+        courseOptions.fillInCourseOptionsWithValidData();
+        paymentInformation.fillWithValidDataPaymentInformation();
+    }
+
     @When("the email value of {string} is inputted")
     public void input_email_to_field(String string) {
         mainPage.inputValueInEmailField(string);
@@ -41,14 +82,28 @@ public class StepDefinitions {
 
     @When("the submit button is clicked")
     public void click_submit_button() {
-        Utils.scrollToElement(driver, mainPage.getVirtualHeader());
+        //Utils.scrollToElement(driver, mainPage.getVirtualHeader());
         mainPage.clickOnSubmitButton();
     }
 
-        @When("I input {string} in the First Name field")
+    @When("I input {string} in the First Name field")
     public void input_First_Name(String string){
         personalInformation.inputValueInFirstNameField(string);
     }
+
+    @When("In Contact Information Page I input e-mail value {string}")
+    public void input_Contact_Information_email (String string) {contactInformation.inputValueInEmailField(string);}
+
+    @When("I click radio button radio for manual tester certificate")
+    public void click_manual_tester_certificate_radio_button() {courseOptions.clickRadioButtonManualTester();
+    }
+
+    @When("I input {string} in the Card holder name")
+    public void input_Card_holder_name (String string) { paymentInformation.inputCardHolderName(string);}
+
+    @When("I click Return to homepage button")
+    public void click_return_to_home_page_button () {registrationConfirmation.clickReturnToHomepage();}
+
 
     @And("I input {string} in the Last Name field")
     public void input_Last_Name_Field(String string) {
@@ -71,7 +126,62 @@ public class StepDefinitions {
     }
 
     @And("I click Personal Information Next button")
-    public void clik_Personal_Information_Next_button() {
+    public void click_Personal_Information_Next_button() {
         personalInformation.clickPersonalInformationNextButton();
     }
+
+    @And("In Contact Information Page I input phone number {string}")
+    public void input_Phone_Number(String string) {contactInformation.inputPhoneNumberField(string);}
+
+    @And("In Contact Information Page I input Country name by value {string}")
+    public void input_Country_Name(String string) {contactInformation.inputCountry(string);}
+
+    @And("In Contact Information Page I input City name by value {string}")
+    public void input_City_name (String string) {contactInformation.inputCity(string);}
+
+    @And("In Contact Information Page I input Post Code number by value {string}")
+    public void input_Post_Code(String string) {contactInformation.inputCodePost(string);}
+
+    @And("In Contact Information Page I click Next button")
+    public void click_Next_Button() {contactInformation.clickNextButtonContactInformation();}
+
+    @And("I click Next button in Course Options Page")
+    public void click_Next_button_in_Course_Option_Page() {courseOptions.click_course_options_next_button();
+    }
+
+    @And("I input value {string} in Card number field")
+    public void input_Card_number_in_the_Payment_Information_Page(String string) {
+        paymentInformation.inputCardNumber(string);
+    }
+
+    @And("I input value {string} in CVC number field")
+    public void input_CVC_number_in_the_Payment_Information_Page(String string) {
+        paymentInformation.inputCVC(string);
+    }
+
+    @And("I click Month dropdown button")
+    public void click_Month_dropdown_button() {
+        paymentInformation.clickDropdownMonth();
+    }
+
+    @And("I click on January month from dropdown list")
+    public void click_on_January_month() {
+        paymentInformation.clickMonthJanuary();
+    }
+
+    @And("I click on Year dropdown button")
+    public void click_Year_dropdown_button() {
+        paymentInformation.clickDropdownYear();
+    }
+
+    @And("I click on 2024 year from dropdown list")
+    public void click_on_2024_year() {
+        paymentInformation.clickYear2024();
+    }
+
+    @And("I click on Next button on Payment Information Page")
+    public void click_Next_button_on_Payment_Information_Page() {
+     paymentInformation.clickNextButtonOnPaymentInformation();
+    }
+
 }
