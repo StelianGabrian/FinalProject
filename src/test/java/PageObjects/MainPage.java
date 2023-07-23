@@ -12,7 +12,10 @@ public class MainPage {
     @FindBy(xpath = "/html/body/section[2]/div/div/div/button")
     private WebElement elementSubmitButton;
 
-    @FindBy(xpath ="/html/body/section[3]/div/div/div[1]/div/div/h3")//pentru a ma deplasa cu scroll in pagina la acest element
+    @FindBy(xpath = "//*[@id=\"learn-selenium\"]/div/div/div[1]/a")
+    private WebElement clickReadMoreAboutSelenium;
+
+    @FindBy(xpath ="//*[@id=\"learn-selenium\"]/div/div/div[1]/h2")//pentru a ma deplasa cu scroll in pagina la acest element
     private WebElement virtualHeader;
 
     public MainPage(WebDriver driver) { //acesta este constructorul
@@ -24,6 +27,8 @@ public class MainPage {
     public void clickOnSubmitButton() {
         elementSubmitButton.click();
     }
+
+    public void clickReadMoreAboutSelenium() {clickReadMoreAboutSelenium.click();}
     public WebElement getVirtualHeader() {
         return virtualHeader;
     }

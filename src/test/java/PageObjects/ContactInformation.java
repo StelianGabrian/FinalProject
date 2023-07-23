@@ -47,7 +47,6 @@ public class ContactInformation {
         inputCity("Obock");
         inputCodePost("500 500");
         clickNextButtonContactInformation();
-
     }
 }
 

@@ -2,26 +2,21 @@ package org.example;
 
 import PageObjects.*;
 import io.cucumber.java.en.*;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+
 public class StepDefinitions {
     private WebDriver driver;
     ChromeOptions options = new ChromeOptions();
-
     //creez un obiect cu numele mainPage in interiorul clasei MainPage
     MainPage mainPage;
-
     //creez un obiect cu numele personalInformation in interiorul clasei PersonalInformation
     PersonalInformation personalInformation;
     ContactInformation contactInformation;
-
     PaymentInformation paymentInformation;
-
     CourseOptions courseOptions;
-
     RegistrationConfirmation registrationConfirmation;
 
     public StepDefinitions() {
@@ -35,6 +30,7 @@ public class StepDefinitions {
         paymentInformation = new PaymentInformation(driver);
         registrationConfirmation = new RegistrationConfirmation(driver);
     }
+
 
     @Given("I am on the main page")
     public void i_am_on_the_main_page() {
@@ -66,13 +62,13 @@ public class StepDefinitions {
         courseOptions.fillInCourseOptionsWithValidData();
     }
 
-    @Given("I am Registration Confirmation Page")
+    @Given("I am on Registration Confirmation Page")
     public void i_am_on_Registration_Confirmation_Page() {
         driver.get("file:///E:/Stelica/Curs%20IT/Testing-Env-master/routes/enrollment.html");
         personalInformation.fillInPersonalInformationWithValidData();
         contactInformation.fillInContactInformationWithValidData();
         courseOptions.fillInCourseOptionsWithValidData();
-        paymentInformation.fillWithValidDataPaymentInformation();
+        paymentInformation.fillInPaymentInformationWithValidData();
     }
 
     @When("the email value of {string} is inputted")
@@ -94,8 +90,13 @@ public class StepDefinitions {
     @When("In Contact Information Page I input e-mail value {string}")
     public void input_Contact_Information_email (String string) {contactInformation.inputValueInEmailField(string);}
 
-    @When("I click radio button radio for manual tester certificate")
+    @When("I click radio button for Manual tester certificate")
     public void click_manual_tester_certificate_radio_button() {courseOptions.clickRadioButtonManualTester();
+    }
+
+    @When("I click radio button for Security tester certificate")
+    public void click_Security_tester_certificate_radio_button() {
+        courseOptions.clickRadioButtonSecurityTesterCertificate();
     }
 
     @When("I input {string} in the Card holder name")
@@ -103,6 +104,11 @@ public class StepDefinitions {
 
     @When("I click Return to homepage button")
     public void click_return_to_home_page_button () {registrationConfirmation.clickReturnToHomepage();}
+
+    @When("I click Read more button for Selenium")
+    public void click_Read_more_Selenium() {
+        Utils.scrollToElement(driver, mainPage.getVirtualHeader());
+        mainPage.clickReadMoreAboutSelenium();}
 
 
     @And("I input {string} in the Last Name field")
@@ -146,8 +152,11 @@ public class StepDefinitions {
     public void click_Next_Button() {contactInformation.clickNextButtonContactInformation();}
 
     @And("I click Next button in Course Options Page")
-    public void click_Next_button_in_Course_Option_Page() {courseOptions.click_course_options_next_button();
+    public void click_Next_button_in_Course_Option_Page() {courseOptions.clickCourseOptionsNextButton();
     }
+
+    @And("I click Back button in Course Options Page")
+    public void click_Back_button_in_Course_Option_Page() {courseOptions.clickCourseOptionsBackButton();}
 
     @And("I input value {string} in Card number field")
     public void input_Card_number_in_the_Payment_Information_Page(String string) {
@@ -181,7 +190,8 @@ public class StepDefinitions {
 
     @And("I click on Next button on Payment Information Page")
     public void click_Next_button_on_Payment_Information_Page() {
-     paymentInformation.clickNextButtonOnPaymentInformation();
+        paymentInformation.clickNextButtonOnPaymentInformation();
     }
+
 
 }
