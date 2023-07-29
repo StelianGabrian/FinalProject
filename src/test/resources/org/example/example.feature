@@ -51,11 +51,15 @@ Feature: An example
     * I input "bluewhales2*" in the Confirm Password field
     * I click Personal Information Next button
 
-    Scenario: TC008 Read more about Selenium
-      Given I am on the main page
-      When I click Read more button for Selenium
+  Scenario: TC008 Read more about Selenium
+    Given I am on the main page
+    When I click Read more button for Selenium
 
-  Scenario: TC009 Input valid values in Contact Information Page
+  Scenario: TC009 Read about Instructors
+    Given I am on the main page
+    When I click Instructors button
+
+  Scenario: TC010 Input valid values in Contact Information Page
     Given I am on Contact Information Page
     When In Contact Information Page I input e-mail value "tester@test.com"
     And In Contact Information Page I input phone number "0740 000 000"
@@ -64,21 +68,21 @@ Feature: An example
     * In Contact Information Page I input Post Code number by value "500 000"
     * In Contact Information Page I click Next button
 
-  Scenario: TC010 Choose Manual Tester Certificate radio button in Course Options
+  Scenario: TC011 Choose Manual Tester Certificate radio button in Course Options
     Given I am on Course Options Page
     When I click radio button for Manual tester certificate
     And I click Next button in Course Options Page
 
-  Scenario: TC0011 Choose Security Tester Certificate radio button in Course Options
+  Scenario: TC0012 Choose Security Tester Certificate radio button in Course Options
     Given I am on Course Options Page
     When I click radio button for Security tester certificate
     And I click Next button in Course Options Page
 
-  Scenario: TC0012 Click Back button in Course Options
+  Scenario: TC0013 Click Back button in Course Options
     Given I am on Course Options Page
     When I click Back button in Course Options Page
 
-  Scenario: TC013 Input valid data up to Payment Information Page
+  Scenario: TC014 Input valid data up to Payment Information Page
     Given I am on the Payment Information Page
     When I input "Ionut Popescu" in the Card holder name
     And I input value "4444 4444 4444" in Card number field
@@ -89,7 +93,25 @@ Feature: An example
     * I click on 2024 year from dropdown list
     * I click on Next button on Payment Information Page
 
-  Scenario: TC014 Input valid data up to Payment Information Page,except CVC number
+  Scenario: TC015 Input valid data up to Payment Information Page - Month & year without dropdown
+    Given I am on the Payment Information Page
+    When I input "Ionut Popescu" in the Card holder name
+    And I input value "4444 4444 4444" in Card number field
+    * I input value "430" in CVC number field
+    * I select month "February"
+    * I select year "2024"
+
+  Scenario: TC016 Input valid data up to Payment Information Page,except Card holder name
+    Given I am on the Payment Information Page
+    When I input value "4444 4444 4444" in Card number field
+    And I input value "430" in CVC number field
+    * I click Month dropdown button
+    * I click on January month from dropdown list
+    * I click on Year dropdown button
+    * I click on 2024 year from dropdown list
+    * I click on Next button on Payment Information Page
+
+  Scenario: TC017 Input valid data up to Payment Information Page,except CVC number
     Given I am on the Payment Information Page
     When I input "Ionut Popescu" in the Card holder name
     And I input value "4444 4444 4444" in Card number field
@@ -99,6 +121,6 @@ Feature: An example
     * I click on 2024 year from dropdown list
     * I click on Next button on Payment Information Page
 
-  Scenario: TC0015 Check return to homepage button from Enrollment page
+  Scenario: TC0018 Check return to homepage button from Enrollment page
     Given I am on Registration Confirmation Page
     When I click Return to homepage button

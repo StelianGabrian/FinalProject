@@ -1,8 +1,10 @@
 package PageObjects;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 public class PaymentInformation {
     @FindBy(xpath = "/html/body/div/div/section/div/form/div[4]/div[2]/input")
@@ -41,6 +43,17 @@ public class PaymentInformation {
     public void clickDropdownYear() {clickDropdownYear.click();}
     public void clickYear2024() {clickYear2024.click(); }
     public void clickNextButtonOnPaymentInformation() {clickNextButtonOnPaymentInformation.click();}
+
+    public void selectMonthByXpath(WebDriver driver, String month) {
+        WebElement dropdown = driver.findElement(By.xpath("//*[@id=\"month\"]"));
+        Select select = new Select(dropdown);
+        select.selectByVisibleText(month);
+    }
+    public void selectYearByXpath(WebDriver driver, String year) {
+        WebElement dropdown = driver.findElement(By.xpath("//*[@id=\"year\"]"));
+        Select select = new Select(dropdown);
+        select.selectByVisibleText(year);
+    }
     public void fillInPaymentInformationWithValidData() {
         inputCardHolderName("Ana Maria");
         inputCardNumber("0000 0000 0000");

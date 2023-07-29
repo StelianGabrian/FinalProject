@@ -110,6 +110,10 @@ public class StepDefinitions {
         Utils.scrollToElement(driver, mainPage.getVirtualHeader());
         mainPage.clickReadMoreAboutSelenium();}
 
+    @When("I click Instructors button")
+    public void click_Instructors_button() {
+        mainPage.clickReadAboutInstructors();
+    }
 
     @And("I input {string} in the Last Name field")
     public void input_Last_Name_Field(String string) {
@@ -178,6 +182,11 @@ public class StepDefinitions {
         paymentInformation.clickMonthJanuary();
     }
 
+    @And("I select month {string}")
+    public void choose_a_month (String month) {
+        paymentInformation.selectMonthByXpath(driver, month);
+    }
+
     @And("I click on Year dropdown button")
     public void click_Year_dropdown_button() {
         paymentInformation.clickDropdownYear();
@@ -186,6 +195,11 @@ public class StepDefinitions {
     @And("I click on 2024 year from dropdown list")
     public void click_on_2024_year() {
         paymentInformation.clickYear2024();
+    }
+
+    @And("I select year {string}")
+    public void choose_an_year (String year) {
+        paymentInformation.selectYearByXpath(driver, year);
     }
 
     @And("I click on Next button on Payment Information Page")

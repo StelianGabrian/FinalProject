@@ -15,6 +15,10 @@ public class MainPage {
     @FindBy(xpath = "//*[@id=\"learn-selenium\"]/div/div/div[1]/a")
     private WebElement clickReadMoreAboutSelenium;
 
+
+    @FindBy(xpath = "//*[@id=\"navmenu\"]/ul/li[3]/a")
+    private WebElement clickReadAboutInstructors;
+
     @FindBy(xpath ="//*[@id=\"learn-selenium\"]/div/div/div[1]/h2")//pentru a ma deplasa cu scroll in pagina la acest element
     private WebElement virtualHeader;
 
@@ -29,6 +33,9 @@ public class MainPage {
     }
 
     public void clickReadMoreAboutSelenium() {clickReadMoreAboutSelenium.click();}
+
+    public void clickReadAboutInstructors() {clickReadAboutInstructors.click();}
+
     public WebElement getVirtualHeader() {
         return virtualHeader;
     }
