@@ -24,6 +24,10 @@ public class ContactInformation {
     @FindBy(xpath = "/html/body/div/div/section/div/form/div[2]/button[2]")
     private WebElement clickNextContactInformation;
 
+    @FindBy(xpath = "/html/body/div/div/section/div/form/div[2]/h3")
+    private WebElement contactInformationHeader;
+
+
     public ContactInformation(WebDriver driver) { //acesta este constructorul
         PageFactory.initElements(driver, this);
     }
@@ -39,6 +43,10 @@ public class ContactInformation {
     public void inputCodePost (String string) {inputPostCode.sendKeys(string);}
 
     public void clickNextButtonContactInformation () {clickNextContactInformation.click();}
+
+    public String getContactInformationHeaderText() {
+        return contactInformationHeader.getText();
+    }
 
     public void fillInContactInformationWithValidData() {
         inputValueInEmailField("tester@test.com");

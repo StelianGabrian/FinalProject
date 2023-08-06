@@ -24,6 +24,9 @@ public class PersonalInformation {
     @FindBy(xpath = "/html/body/div/div/section/div/form/div[1]/button")
     private WebElement personalInformationNextButton;
 
+    @FindBy(xpath = "/html/body/div/div/section/div/form/div[1]/h3")
+    private WebElement personalInformationHeader;
+
     //Constructor
     public PersonalInformation(WebDriver driver) { //acesta este constructorul
         PageFactory.initElements(driver, this);
@@ -40,6 +43,10 @@ public class PersonalInformation {
     public void inputConfirmPasswordField(String string) {inputConfirmPasswordField.sendKeys(string);}
 
     public void clickPersonalInformationNextButton() {personalInformationNextButton.click();}
+
+    public String getPersonalInformationHeaderText() {
+        return personalInformationHeader.getText();
+    }
 
     public void fillInPersonalInformationWithValidData() {
         inputValueInFirstNameField("Ana");
