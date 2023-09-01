@@ -53,7 +53,7 @@ public class ContactInformation {
         inputPhoneNumberField("0740 000 000");
         inputCountry("Djibouti");
         inputCity("Obock");
-        inputCodePost("500 500");
+        inputCodePost("500 5005");
         clickNextButtonContactInformation();
     }
 }
