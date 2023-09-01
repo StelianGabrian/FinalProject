@@ -61,6 +61,7 @@ Feature: An example
     Given I am on the main page
     When I click Instructors button
     Then the page must scroll down to the Instructor section
+    # Then the page scroll down to the Instructor section !!!!!
 
   Scenario: TC009 Input valid values in Contact Information form
     Given I am on Contact Information form
