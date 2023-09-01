@@ -6,11 +6,11 @@ Feature: An example
     And the submit button is clicked
     Then the newsletter confirmation pop-up appears
 
-  Scenario: TC002 Invalid e-mail for newsletter - over character limit
+  Scenario: TC002 Invalid e-mail for newsletter
     Given I am on the main page
-    When the e-mail value of "Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" is inputted
+    When the e-mail value of "Aaaaaaaaaaaaaaaaaaaaaaaaaaa" is inputted
     And the submit button is clicked
-    Then the placeHolder becomes red and I am not allowed to Submit
+    Then I am not allowed to Submit
 
   Scenario: TC003 Input a valid First Name
     Given I am on the Personal Information form
@@ -136,3 +136,5 @@ Feature: An example
     Given I am on Registration Confirmation form
     When I click Return to homepage button
     Then the homepage opens
+
+

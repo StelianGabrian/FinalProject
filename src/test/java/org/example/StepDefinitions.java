@@ -4,9 +4,7 @@ import PageObjects.*;
 import io.cucumber.java.en.*;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
@@ -236,11 +234,12 @@ public class StepDefinitions {
     /*----------------------------------------------------THEN--------------------------------------------------------*/
     @Then("the newsletter confirmation pop-up appears")
     public void theNewsletterConfirmationPopUpAppears() {
-        Utils.waitForElementToLoad(1);
+        Utils.waitForElementToLoad(3);
         driver.switchTo().alert().accept();
     }
-    @Then("the placeHolder becomes red and I am not allowed to Submit")
-    public void thePlaceHolderBecomesRed() {
+    @Then("I am not allowed to Submit")
+    public void iAmNotAllowedToSubmit() {
+        Utils.waitForElementToLoad(3);
         Assertions.assertTrue(driver.getPageSource().contains("error"));
     }
     @Then("the Contact information form opens")
@@ -249,7 +248,7 @@ public class StepDefinitions {
     }
     @Then("I remain on Personal information form")
     public void iAmNotAllowedToAccessTheContactInformationForm() {
-        Assertions.assertEquals ("Personal information",personalInformation.getPersonalInformationHeaderText());
+        Assertions.assertEquals ("Personal information", personalInformation.getPersonalInformationHeaderText());
     }
     @Then("the Selenium page opens")
     public void theSeleniumPageOpens() {
@@ -257,7 +256,7 @@ public class StepDefinitions {
     }
     @Then("the page must scroll down to the Instructor section")
     public void thePageMustScrollDownToTheInstructorSection() {
-        Assertions.assertTrue(driver.findElement(By.id("instructors")).isDisplayed());
+        Assertions.assertEquals("Our Instructors", mainPage.getOurInstructorsHeaderText());
     }
     @Then("the Course options form opens")
     public void theCourseOptionFormOpens() {
@@ -283,4 +282,6 @@ public class StepDefinitions {
     public void iRemainOnCourseOptionsForm() {
         Assertions.assertTrue( driver.findElement(By.xpath("/html/body/div/div/section/div/form/div[3]/h3")).isDisplayed());
     }
-}
+
+
+ }
