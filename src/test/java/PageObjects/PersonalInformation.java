@@ -51,7 +51,7 @@ public class PersonalInformation {
     public void fillInPersonalInformationWithValidData() {
         inputValueInFirstNameField("Ana");
         inputValueInTheLastNameField("Popescu");
-        inputValueInTheUsernameField("John");
+        inputValueInTheUsernameField("Johny");
         inputValueInThePasswordField("bluewhales2*");
         inputConfirmPasswordField("bluewhales2*");
         clickPersonalInformationNextButton();
