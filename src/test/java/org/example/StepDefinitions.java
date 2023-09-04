@@ -1,9 +1,13 @@
 package org.example;
 
 import PageObjects.*;
+import io.cucumber.java.After;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.*;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -283,5 +287,13 @@ public class StepDefinitions {
         Assertions.assertTrue( driver.findElement(By.xpath("/html/body/div/div/section/div/form/div[3]/h3")).isDisplayed());
     }
 
+    @After
+    public void cleanUp(Scenario scenario) {
+        if (scenario.isFailed()) {
+            final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(screenshot, "image/jpg", "");
+        }
+        driver.quit();
+    }
 
  }
